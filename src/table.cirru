@@ -7,18 +7,29 @@ var
   div $ deku.element.bind null :div
   textarea $ deku.element.bind null :textarea
 
-var parseColors $ \ (text)
-  var lines $ ... text
-    trim
-    split ":\n"
-  return $ lines.map $ \ (color)
-    try
-      do
-        var colorObj $ Color color
-        return $ colorObj.hslString
-      error
-        console.log error
-        return :red
+var showHex $ \ (text)
+  try
+    do
+      var colorObj $ Color text
+      return $ colorObj.hexString
+    error
+      return :error
+
+var showHsl $ \ (text)
+  try
+    do
+      var colorObj $ Color text
+      return $ colorObj.hslString
+    error
+      return :error
+
+var showRgb $ \ (text)
+  try
+    do
+      var colorObj $ Color text
+      return $ colorObj.rgbString
+    error
+      return :error
 
 = module.exports $ {}
   :initialState $ \ ()
@@ -30,7 +41,6 @@ var parseColors $ \ (text)
     var text $ localStorage.getItem :hex-color-list
     setState $ {}
       :text text
-      :colors $ parseColors text
 
   :afterUpdate $ \ (component prevProps prevState setState)
     localStorage.setItem :hex-color-list component.state.text
@@ -41,19 +51,27 @@ var parseColors $ \ (text)
     var onChange $ \ (event)
       var newState $ {}
         :text event.target.value
-        :colors $ parseColors event.target.value
       setState newState
+
+    var colors $ ... state.text
+      trim
+      split ":\n"
 
     return $ div ({} (:class :app-table))
       textarea ({} (:value state.text) (:onInput onChange) (:class :text))
       div ({} (:class :colors))
-        state.colors.map $ \ (color)
-          return $ div ({}) color
+        colors.map $ \ (color)
+          return $ div ({}) (showHex color)
+      div ({} (:class :colors))
+        colors.map $ \ (color)
+          return $ div ({}) (showHsl color)
+      div ({} (:class :colors))
+        colors.map $ \ (color)
+          return $ div ({}) (showRgb color)
       div ({} (:class :demos))
-        state.colors.map $ \ (color)
+        colors.map $ \ (color)
           return $ div
             {}
               :class :color-demo
               :style $ {}
-                :background-color color
-            , ":demo"
+                :background-color (showHsl color)

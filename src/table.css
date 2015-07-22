@@ -2,18 +2,23 @@
 .app-table {
     display: flex;
     flex-direction: row;
-    height: 400px;
+    height: 100%;
     align-items: stretch;
+    position: absolute;
+    width: 100%;
 }
 
 .app-table > * {
     font-size: 16px;
     font-family: Menlo;
     line-height: 2em;
-    width: 400px;
+    flex: 1;
+    padding: 1em;
 }
 
 .app-table .text {
+    outline: none;
+    border: none;
 }
 
 .app-table .colors {
@@ -22,4 +27,5 @@
 .app-table .demos {}
 
 .app-table .demos .color-demo {
+    height: 32px;
 }
