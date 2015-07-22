@@ -9,19 +9,36 @@
 }
 
 .app-table > * {
-    font-size: 16px;
-    font-family: Menlo;
+    font-size: 14px;
+    font-family: Ubuntu Mono, monospace;
     line-height: 2em;
-    flex: 1;
     padding: 1em;
+    color: hsl(0, 0%, 20%);
 }
 
 .app-table .text {
     outline: none;
     border: none;
+    flex: 1;
+}
+
+.app-table .collection {
+    flex: 3;
+    background-color: hsl(0, 0%, 97%);
 }
 
 .app-table .colors {
+    display: flex;
+    flex-direction: row;
+    box-shadow: 0 1px 0px hsl(0, 0%, 91%);
+}
+
+.colors:hover {
+    background-color: hsl(0, 0%, 96%);
+}
+
+.app-table .colors > div {
+    flex: 1;
 }
 
 .app-table .demos {}

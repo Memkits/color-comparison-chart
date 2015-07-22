@@ -1,8 +1,10 @@
 
-Workflow based on Webpack & CirruScript
+Color Comparison Chart
 ----
 
-Scaffold for personal projects.
+Small tool to compare colors in various formats.
+
+Demo: http://repo.tiye.me/color-comparison-chart/
 
 ### Usage
 

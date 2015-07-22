@@ -7,29 +7,25 @@ var
   div $ deku.element.bind null :div
   textarea $ deku.element.bind null :textarea
 
-var showHex $ \ (text)
+var toFormat $ \ (text method)
   try
     do
       var colorObj $ Color text
-      return $ colorObj.hexString
+      return $ method colorObj
     error
-      return :error
+      return :__err__
+
+var showHex $ \ (text)
+  return $ toFormat text $ \ (colorObj)
+    return $ colorObj.hexString
 
 var showHsl $ \ (text)
-  try
-    do
-      var colorObj $ Color text
-      return $ colorObj.hslString
-    error
-      return :error
+  return $ toFormat text $ \ (colorObj)
+    return $ colorObj.hslString
 
 var showRgb $ \ (text)
-  try
-    do
-      var colorObj $ Color text
-      return $ colorObj.rgbString
-    error
-      return :error
+  return $ toFormat text $ \ (colorObj)
+    return $ colorObj.rgbString
 
 = module.exports $ {}
   :initialState $ \ ()
@@ -38,12 +34,12 @@ var showRgb $ \ (text)
       :colors $ []
 
   :afterMount $ \ (component el setState)
-    var text $ localStorage.getItem :hex-color-list
+    var text $ localStorage.getItem :color-comparison-chart
     setState $ {}
-      :text text
+      :text $ or text ":hsl(240,100%,90%)"
 
   :afterUpdate $ \ (component prevProps prevState setState)
-    localStorage.setItem :hex-color-list component.state.text
+    localStorage.setItem :color-comparison-chart component.state.text
 
   :render $ \ (component setState)
     var state component.state
@@ -58,20 +54,16 @@ var showRgb $ \ (text)
       split ":\n"
 
     return $ div ({} (:class :app-table))
-      textarea ({} (:value state.text) (:onInput onChange) (:class :text))
-      div ({} (:class :colors))
+      textarea $ {} (:value state.text) (:onInput onChange)
+        :class :text
+        :autofocus true
+      div ({} (:class :collection))
         colors.map $ \ (color)
-          return $ div ({}) (showHex color)
-      div ({} (:class :colors))
-        colors.map $ \ (color)
-          return $ div ({}) (showHsl color)
-      div ({} (:class :colors))
-        colors.map $ \ (color)
-          return $ div ({}) (showRgb color)
-      div ({} (:class :demos))
-        colors.map $ \ (color)
-          return $ div
-            {}
+          return $ div ({} (:class :colors))
+            div ({}) (showHex color)
+            div ({}) (showHsl color)
+            div ({}) (showRgb color)
+            div $ {}
               :class :color-demo
               :style $ {}
                 :background-color (showHsl color)

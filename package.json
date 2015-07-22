@@ -1,7 +1,7 @@
 {
-  "name": "webpack-workflow",
+  "name": "color-comparison-chart",
   "version": "0.0.1",
-  "description": "Web app scaffold based on Webpack",
+  "description": "Small tool to compare colors",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,7 +9,7 @@
   "author": "jiyinyiyong",
   "license": "MIT",
   "keywords": [
-    "workflow"
+    "color"
   ],
   "devDependencies": {
     "cirru-script": "^0.2.3",
@@ -30,10 +30,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mvc-works/webpack-workflow.git"
+    "url": "https://github.com/Memkits/color-comparison-chart.git"
   },
   "bugs": {
-    "url": "https://github.com/mvc-works/webpack-workflow/issues"
+    "url": "https://github.com/Memkits/color-comparison-chart/issues"
   },
-  "homepage": "https://github.com/mvc-works/webpack-workflow"
+  "homepage": "https://github.com/Memkits/color-comparison-chart"
 }
