@@ -1,0 +1,10 @@
+
+@import url(table.css);
+
+body {
+  margin: 0;
+}
+
+body * {
+  box-sizing: border-box;
+}

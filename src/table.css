@@ -1,0 +1,25 @@
+
+.app-table {
+    display: flex;
+    flex-direction: row;
+    height: 400px;
+    align-items: stretch;
+}
+
+.app-table > * {
+    font-size: 16px;
+    font-family: Menlo;
+    line-height: 2em;
+    width: 400px;
+}
+
+.app-table .text {
+}
+
+.app-table .colors {
+}
+
+.app-table .demos {}
+
+.app-table .demos .color-demo {
+}
