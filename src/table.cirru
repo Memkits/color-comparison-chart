@@ -8,9 +8,11 @@ var
   textarea $ deku.element.bind null :textarea
 
 var toFormat $ \ (text method)
+  var pieces $ text.split :;
+  = text $ . pieces 0
   try
     do
-      var colorObj $ Color text
+      var colorObj $ Color (text.trim)
       return $ method colorObj
     error
       return :__err__
@@ -36,7 +38,7 @@ var showRgb $ \ (text)
   :afterMount $ \ (component el setState)
     var text $ localStorage.getItem :color-comparison-chart
     setState $ {}
-      :text $ or text ":hsl(240,100%,90%)"
+      :text $ or text ":hsl(240,100%,90%); Cirru Color"
 
   :afterUpdate $ \ (component prevProps prevState setState)
     localStorage.setItem :color-comparison-chart component.state.text
@@ -57,6 +59,7 @@ var showRgb $ \ (text)
       textarea $ {} (:value state.text) (:onInput onChange)
         :class :text
         :autofocus true
+        :placeholder ":hsl(240,100%,90%); Cirru Color"
       div ({} (:class :collection))
         colors.map $ \ (color)
           return $ div ({} (:class :colors))
